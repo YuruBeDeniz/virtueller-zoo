@@ -1,9 +1,11 @@
 import holograms from "../data/holograms.json";
+import CreateHologram from "./CreateHologram";
 
 export default function Holograms() {
   return (
     <>
     <h1 className="text-[30px]">Holograms</h1>
+    <CreateHologram />
     <table className="table-auto m-auto w-full text-left">
         <thead className="border-b-2 border-slate-400">
           <tr>
