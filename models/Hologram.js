@@ -1,7 +1,7 @@
 
 const { Schema, model } = require("mongoose");
 
-const animalSchema = new Schema({
+const hologramSchema = new Schema({
     name: { 
         type: String, 
         required: true 
@@ -13,10 +13,11 @@ const animalSchema = new Schema({
         type: String,  
     },
     extinctSince: { 
-        type: Date 
+        type: String,
+        default: "not extinct"
     }
 });
 
-const Animal = model("Animal", animalSchema);
+const Hologram = model("Hologram", hologramSchema);
 
-module.exports = Animal;
+module.exports = Hologram;

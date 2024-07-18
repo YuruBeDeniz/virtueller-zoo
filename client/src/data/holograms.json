@@ -1,0 +1,30 @@
+[
+    {
+        "_id": "a",
+        "name": "canguru",
+        "weight": 15,
+        "superpower": "kick",
+        "extinctSince": "not extinct"
+    },
+    {
+        "_id": "b",
+        "name": "dinosaur",
+        "weight": 150,
+        "superpower": "run fast",
+        "extinctSince": "approximately 1500 BC"
+    },
+    {
+        "_id": "c",
+        "name": "dog",
+        "weight": 15,
+        "superpower": "smell",
+        "extinctSince": "not extinct"
+    },
+    {
+        "_id": "d",
+        "name": "cat",
+        "weight": 8,
+        "superpower": "flexible",
+        "extinctSince": "not extinct"
+    }
+]
