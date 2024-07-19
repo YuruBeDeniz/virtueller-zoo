@@ -30,20 +30,29 @@ export default function CreateHologram() {
 
 
   return (
-    <div className='flex flex-col bg-gray-200'>
-    <h1>Create Hologram</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Name</label>
-        <input type='text' value={name} onChange={handleNameChange} />
-        <label>Gewicht</label>
-        <input type='text' value={weight} onChange={handleWeightChange} />
-        <label>Superkraft</label>
-        <input type='text' value={superpower} onChange={handleSuperpowerChange} />
-        <label>Ausgestorben seit</label>
-        <input type='text' value={extinctSince} onChange={handleExtinctSinceChange} />
-        <button>Zusenden</button>
+    <div className='max-w-xl mx-auto p-5'>
+      <form className='space-y-4' onSubmit={handleSubmit}>
+        <div>
+          <label className='block text-sm font-medium text-gray-700'>Name</label>
+          <input type='text' value={name} onChange={handleNameChange} className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md' />
+        </div>
+        <div>
+          <label className='block text-sm font-medium text-gray-700'>Gewicht</label>
+          <input type='text' value={weight} onChange={handleWeightChange} className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md' />
+        </div>
+        <div>
+          <label className='block text-sm font-medium text-gray-700'>Superkraft</label>
+          <input type='text' value={superpower} onChange={handleSuperpowerChange} className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md' />
+        </div>
+        <div>
+          <label className='block text-sm font-medium text-gray-700'>Ausgestorben seit</label>
+          <input type='text' value={extinctSince} onChange={handleExtinctSinceChange} className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md' />
+        </div>
+        <div className='flex justify-between'>
+          <button className='py-2 px-4 bg-blue-500 text-white font-semibold rounded-md shadow-lg hover:bg-blue-700'>Zusenden</button>
+        </div>
       </form>
-      {errorMessage && <h3 className='text-red-600'>{errorMessage}</h3>}
+      {errorMessage && <h3 className='text-red-600 mt-4'>{errorMessage}</h3>}
     </div>
   )
 }
