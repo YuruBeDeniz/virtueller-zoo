@@ -70,6 +70,17 @@ router.get("/details/:id", (req, res) => {
       console.error(err);
       res.status(500).json({ message: "Internal server error." });
     });
+});
+
+router.delete("/:id", (req, res) => {
+  Hologram.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.status(200).json({ message: "Hologram deleted." });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ message: "Internal server error." });
+    });
 })
 
 module.exports = router;
