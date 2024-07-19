@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import axios from "axios";
 
-
 export default function CreateHologram() {
   const [name, setName] = useState("");
   const [weight, setWeight] = useState(0);
   const [superpower, setSuperpower] = useState("");
-  const [extinctSince, setExtinctSince] = useState("");
+  const [extinctSince, setExtinctSince] = useState("not extinct");
   const [errorMessage, setErrorMessage] = useState("");
+
 
   const handleNameChange = e => setName(e.target.value);
   const handleWeightChange = e => setWeight(e.target.value);
@@ -18,13 +18,19 @@ export default function CreateHologram() {
     e.preventDefault();
     const requestBody = { name, weight, superpower, extinctSince }
     axios.post("/api/hologram", requestBody)
-    .then(response => console.log(response))
+    .then(response => {
+      console.log(response);
+      setName("");
+      setWeight(0);
+      setSuperpower("");
+      setExtinctSince("");
+    })
     .catch(error => setErrorMessage(error.response.data.message))
   }
 
 
   return (
-    <div className=''>
+    <div className='flex flex-col bg-gray-200'>
     <h1>Create Hologram</h1>
       <form onSubmit={handleSubmit}>
         <label>Name</label>

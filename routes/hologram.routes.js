@@ -81,6 +81,18 @@ router.delete("/:id", (req, res) => {
       console.error(err);
       res.status(500).json({ message: "Internal server error." });
     });
+});
+
+router.get("/getSearchedHolograms", (req, res) => {
+  const { q = "" } = req.query;
+  Hologram.find({ name: { $regex: new RegExp(q, "i") }})
+   .then(filteredHolograms => {
+    res.status(200).json(filteredHolograms);
+   })
+   .catch(err => {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error." });
+  });
 })
 
 module.exports = router;
