@@ -38,4 +38,38 @@ router.get("/getHolograms", (req, res) => {
       })
 });
 
+router.put("/:id", (req, res) => {
+  const { name, weight, superpower, extinctSince } = req.body;
+
+  if (!name || weight === 0 || !superpower || !extinctSince) {
+    return res.status(400).json({message: "Please fill in all fields."})
+  };
+
+  Hologram.findByIdAndUpdate(req.params.id, { name, weight, superpower, extinctSince }, { new: true })
+  .then(hologram => {
+    if (!hologram) {
+      return res.status(404).json({ message: "Hologram not found." });
+    }
+    res.status(200).json(hologram);
+  })
+  .catch(err => {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error." });
+  });
+});
+
+router.get("/details/:id", (req, res) => {
+  Hologram.findById(req.params.id)
+    .then(hologramFromDB => {
+      if (!hologramFromDB) {
+        return res.status(404).json({ message: "Hologram not found." });
+      }
+      res.status(200).json(hologramFromDB);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ message: "Internal server error." });
+    });
+})
+
 module.exports = router;

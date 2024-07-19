@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import CreateHologram from "./CreateHologram";
 import axios from "axios";
 
@@ -34,7 +35,7 @@ export default function Holograms() {
               <td className="p-4">{hologram.weight} kg</td>
               <td className="p-4">{hologram.superpower}</td>
               <td className="p-4">{hologram.extinctSince}</td>
-              <td><a href="/edit/:id">Edit</a></td>
+              <td> <Link to={`/hologram/edit/${hologram._id}`}>Edit</Link></td>
             </tr>
           ))}
         </tbody>
