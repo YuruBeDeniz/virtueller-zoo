@@ -27,6 +27,15 @@ router.post("/", (req, res) => {
         res.status(500).json({ message: "Internal server error." })
       })
     
-})
+});
+
+router.get("/getHolograms", (req, res) => {
+  Hologram.find()
+      .then(holograms => res.status(200).json(holograms))
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({ message: "Internal server error." })
+      })
+});
 
 module.exports = router;

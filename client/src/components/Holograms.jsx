@@ -1,7 +1,19 @@
-import holograms from "../data/holograms.json";
+import { useEffect, useState } from "react";
 import CreateHologram from "./CreateHologram";
+import axios from "axios";
 
 export default function Holograms() {
+  const [holograms, setHolograms] = useState([]);
+
+  useEffect(() => {
+    axios.get("/api/hologram/getHolograms")
+      .then((response) => {
+        setHolograms(response.data);
+      })
+      .catch(error => console.log(error))
+  }, []);
+
+
   return (
     <>
     <h1 className="text-[30px]">Holograms</h1>
@@ -19,9 +31,10 @@ export default function Holograms() {
           {holograms.map(hologram => (
             <tr key={hologram._id}>
               <td className="p-4">{hologram.name}</td>
-              <td className="p-4">{hologram.weight}</td>
+              <td className="p-4">{hologram.weight} kg</td>
               <td className="p-4">{hologram.superpower}</td>
               <td className="p-4">{hologram.extinctSince}</td>
+              <td><a href="/edit/:id">Edit</a></td>
             </tr>
           ))}
         </tbody>

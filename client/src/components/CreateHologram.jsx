@@ -24,7 +24,7 @@ export default function CreateHologram() {
 
 
   return (
-    <div className='flex flex-col'>
+    <div className=''>
     <h1>Create Hologram</h1>
       <form onSubmit={handleSubmit}>
         <label>Name</label>
