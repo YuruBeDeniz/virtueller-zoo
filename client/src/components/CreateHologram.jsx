@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from "axios";
+import ToastNotification from './ToastNotification';
 
 export default function CreateHologram() {
   const [name, setName] = useState("");
@@ -7,6 +8,8 @@ export default function CreateHologram() {
   const [superpower, setSuperpower] = useState("");
   const [extinctSince, setExtinctSince] = useState("not extinct");
   const [errorMessage, setErrorMessage] = useState("");
+  const [toastNotificationMessage, setToastNotificationMessage] = useState("");
+  const [showToastNotification, setShowToastNotification] = useState(false);
 
 
   const handleNameChange = e => setName(e.target.value);
@@ -24,9 +27,17 @@ export default function CreateHologram() {
       setWeight(0);
       setSuperpower("");
       setExtinctSince("");
+      setToastNotificationMessage("Hologramm erfolgreich erstellt");
+      setShowToastNotification(true);
+      setTimeout(() => {
+        setShowToastNotification(false);
+      }, 2000);
+      window.location.reload();
     })
     .catch(error => setErrorMessage(error.response.data.message))
-  }
+  };
+
+  const handleToastClose = () => showToastNotification(false);
 
 
   return (
@@ -53,6 +64,7 @@ export default function CreateHologram() {
         </div>
       </form>
       {errorMessage && <h3 className='text-red-600 mt-4'>{errorMessage}</h3>}
+      <ToastNotification message={toastNotificationMessage} show={showToastNotification} onClose={handleToastClose} />
     </div>
   )
 }

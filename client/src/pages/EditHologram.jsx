@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import { useNavigate, useParams } from 'react-router-dom';
+import ToastNotification from '../components/ToastNotification';
 
 
 export default function EditHologram() {
@@ -9,6 +10,8 @@ export default function EditHologram() {
   const [superpower, setSuperpower] = useState("");
   const [extinctSince, setExtinctSince] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [toastNotificationMessage, setToastNotificationMessage] = useState("");
+  const [showToastNotification, setShowToastNotification] = useState(false);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -23,10 +26,16 @@ export default function EditHologram() {
     const requestBody = { name, weight, superpower, extinctSince }
     axios.put(`/api/hologram/${id}`, requestBody)
     .then(response => {
-        navigate("/");
+        setToastNotificationMessage("Hologramm erfolgreich bearbeitet");
+        setShowToastNotification(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
     })
     .catch(error => setErrorMessage(error.response.data.message))
   };
+
+  const handleToastClose = () => showToastNotification(false);
 
   useEffect(() => {
     axios.get(`/api/hologram/details/${id}`)
@@ -39,12 +48,16 @@ export default function EditHologram() {
         setExtinctSince(extinctSince);
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [id]);
 
   const deleteHologram = () => {
     axios.delete(`/api/hologram/${id}`)
      .then(() => {
+      setToastNotificationMessage("Hologramm erfolgreich gelöscht");
+      setShowToastNotification(true);
+      setTimeout(() => {
         navigate("/");
+      }, 2000);
      })
      .catch(err => console.log(err));
   }
@@ -75,6 +88,7 @@ export default function EditHologram() {
         </div>
       </form>
       {errorMessage && <h3 className='text-red-600 mt-4'>{errorMessage}</h3>}
+      <ToastNotification message={toastNotificationMessage} show={showToastNotification} onClose={handleToastClose} />
     </div>
   )
 }
