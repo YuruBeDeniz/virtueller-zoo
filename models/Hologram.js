@@ -14,7 +14,7 @@ const hologramSchema = new Schema({
     },
     extinctSince: { 
         type: String,
-        default: "not extinct"
+        default: "nicht ausgestorben"
     }
 });
 

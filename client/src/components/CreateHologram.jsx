@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import axios from "axios";
 import ToastNotification from './ToastNotification';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function CreateHologram() {
   const [name, setName] = useState("");
   const [weight, setWeight] = useState(0);
   const [superpower, setSuperpower] = useState("");
-  const [extinctSince, setExtinctSince] = useState("not extinct");
+  const [extinctSince, setExtinctSince] = useState("nicht ausgestorben");
   const [errorMessage, setErrorMessage] = useState("");
   const [toastNotificationMessage, setToastNotificationMessage] = useState("");
   const [showToastNotification, setShowToastNotification] = useState(false);
 
+  const navigate = useNavigate();
 
   const handleNameChange = e => setName(e.target.value);
   const handleWeightChange = e => setWeight(e.target.value);
@@ -22,7 +24,6 @@ export default function CreateHologram() {
     const requestBody = { name, weight, superpower, extinctSince }
     axios.post("/api/hologram", requestBody)
     .then(response => {
-      console.log(response);
       setName("");
       setWeight(0);
       setSuperpower("");
@@ -30,14 +31,13 @@ export default function CreateHologram() {
       setToastNotificationMessage("Hologramm erfolgreich erstellt");
       setShowToastNotification(true);
       setTimeout(() => {
-        setShowToastNotification(false);
+        navigate("/");
       }, 2000);
-      window.location.reload();
     })
     .catch(error => setErrorMessage(error.response.data.message))
   };
 
-  const handleToastClose = () => showToastNotification(false);
+  const handleToastClose = () => setShowToastNotification(false);
 
 
   return (
@@ -60,7 +60,8 @@ export default function CreateHologram() {
           <input type='text' value={extinctSince} onChange={handleExtinctSinceChange} className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md' />
         </div>
         <div className='flex justify-between'>
-          <button className='py-2 px-4 bg-blue-500 text-white font-semibold rounded-md shadow-lg hover:bg-blue-700'>Zusenden</button>
+          <button className='py-2 px-4 bg-blue-500 text-white font-semibold rounded-md shadow-lg hover:bg-blue-700'>Speichern</button>
+          <Link to="/" className='py-2 px-4 bg-gray-500 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700'>Abbrechen</Link>
         </div>
       </form>
       {errorMessage && <h3 className='text-red-600 mt-4'>{errorMessage}</h3>}

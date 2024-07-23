@@ -35,7 +35,7 @@ export default function EditHologram() {
     .catch(error => setErrorMessage(error.response.data.message))
   };
 
-  const handleToastClose = () => showToastNotification(false);
+  const handleToastClose = () => setShowToastNotification(false);
 
   useEffect(() => {
     axios.get(`/api/hologram/details/${id}`)
