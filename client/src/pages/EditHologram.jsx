@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from "axios";
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import ToastNotification from '../components/ToastNotification';
 
 
@@ -83,8 +83,11 @@ export default function EditHologram() {
           <input type='text' value={extinctSince} onChange={handleExtinctSinceChange} className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md' />
         </div>
         <div className='flex justify-between'>
+          <div className='flex gap-2'>
           <button className='py-2 px-4 bg-blue-500 text-white font-semibold rounded-md shadow-lg hover:bg-blue-700'>Zusenden</button>
           <button onClick={deleteHologram} className='py-2 px-4 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-700'>Löschen</button>
+          </div>
+          <Link to="/" className='py-2 px-4 bg-gray-500 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700'>Zurück</Link>
         </div>
       </form>
       {errorMessage && <h3 className='text-red-600 mt-4'>{errorMessage}</h3>}

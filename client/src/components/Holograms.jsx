@@ -76,7 +76,7 @@ export default function Holograms() {
   return (
     <>
     <h1 className="flex justify-center text-[30px]">Holograms</h1>
-    <div className="flex justify-end"><Link className="py-2 px-4 mb-4 bg-blue-500 text-white font-semibold rounded-md shadow-lg hover:bg-blue-700" to="/create-hologram">Hologram Erstellen</Link></div>
+    <div className="flex justify-center"><Link className="py-2 px-4 mb-4 bg-blue-500 text-white font-semibold rounded-md shadow-lg hover:bg-blue-700" to="/create-hologram">Hologram Erstellen</Link></div>
     <input 
       value={searchByName} 
       onChange={handleSearch} 
