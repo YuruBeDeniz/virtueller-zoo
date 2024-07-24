@@ -21,7 +21,7 @@ export default function CreateHologram() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const requestBody = { name, weight, superpower, extinctSince }
+    const requestBody = { name: name.toLowerCase(), weight, superpower, extinctSince }
     axios.post("/api/hologram", requestBody)
     .then(response => {
       setName("");

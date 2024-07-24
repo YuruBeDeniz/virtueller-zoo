@@ -5,13 +5,13 @@ router.post("/", (req, res) => {
     const { name, weight, superpower, extinctSince } = req.body;
 
     if (!name || weight === 0 || !superpower || !extinctSince) {
-        return res.status(400).json({message: "Please fill in all fields."})
+        return res.status(400).json({message: "Bitte füllen Sie alle Felder aus."})
     };
 
-    Hologram.findOne({ name })
+    Hologram.findOne({ name: name.toLowerCase() })
       .then(foundHologram => {
         if(foundHologram) {
-          res.status(400).json({message: "Hologram already exists."});
+          res.status(400).json({message: "Das Hologramm existiert bereits."});
           return;
         }
 
@@ -42,13 +42,13 @@ router.put("/:id", (req, res) => {
   const { name, weight, superpower, extinctSince } = req.body;
 
   if (!name || weight === 0 || !superpower || !extinctSince) {
-    return res.status(400).json({message: "Please fill in all fields."})
+    return res.status(400).json({message: "Bitte füllen Sie alle Felder aus."})
   };
 
   Hologram.findByIdAndUpdate(req.params.id, { name, weight, superpower, extinctSince }, { new: true })
   .then(hologram => {
     if (!hologram) {
-      return res.status(404).json({ message: "Hologram not found." });
+      return res.status(404).json({ message: "Hologram nicht gefunden." });
     }
     res.status(200).json(hologram);
   })
@@ -62,7 +62,7 @@ router.get("/details/:id", (req, res) => {
   Hologram.findById(req.params.id)
     .then(hologramFromDB => {
       if (!hologramFromDB) {
-        return res.status(404).json({ message: "Hologram not found." });
+        return res.status(404).json({ message: "Hologram nicht gefunden." });
       }
       res.status(200).json(hologramFromDB);
     })
@@ -75,7 +75,7 @@ router.get("/details/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   Hologram.findByIdAndDelete(req.params.id)
     .then(() => {
-      res.status(200).json({ message: "Hologram deleted." });
+      res.status(200).json({ message: "Hologramm gelöscht." });
     })
     .catch(err => {
       console.error(err);
